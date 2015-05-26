@@ -1,4 +1,4 @@
-package me.bravojin.layer.util;
+package me.bravojin.layer.api;
 
 import java.awt.image.BufferedImage;
 

@@ -7,5 +7,5 @@ import java.awt.image.BufferedImage;
  */
 public interface ZoneInterface {
     public ZoneType getZoneType();
-    BufferedImage filter(BufferedImage originImg);
+    public BufferedImage filter(BufferedImage originImg);
 }

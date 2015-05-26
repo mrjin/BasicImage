@@ -4,26 +4,40 @@ package me.bravojin.layer.gradient.lightingGradient;
  * Created by tyrionlanister on 15-5-25.
  */
 import me.bravojin.layer.gradient.GradientInterface;
-import me.bravojin.layer.gradient.gradientType.GradientTypeInterface;
-import me.bravojin.layer.util.GenerateBufferedImage;
-import me.bravojin.layer.util.Zone;
+import me.bravojin.layer.gradient.gradientType.GradientTypeEnumerator;
+import me.bravojin.layer.api.GenerateBufferedImage;
+import me.bravojin.layer.gradient.gradientType.GradientModeEnumerator;
+import me.bravojin.layer.api.Zone;
 import me.bravojin.pixelPosition.PixelPosition;
 import me.bravojin.zone.ZoneInterface;
 import me.bravojin.pixelPosition.PixelPositionInterface;
-import me.bravojin.layer.gradient.lightingGradient.LightingGradientDirection;
 import me.bravojin.util.EculidDistance;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class LightingGradient implements GradientInterface,Zone,GenerateBufferedImage {
+public class LightingGradientLinear implements GradientInterface,Zone,GenerateBufferedImage {
     private String number;
+    private GradientModeEnumerator gradientMode;
+    private GradientTypeEnumerator gradientType;
     private PixelPositionInterface startPixel;
     private PixelPositionInterface endPixel;
     private ZoneInterface zone;
-    private GradientTypeInterface gradientType;
     private LightingGradientDirection directionConfig;
+    private double alpha;
+    private double level;
+
+    private void initialParam() {
+        this.alpha = 1;
+        this.level = 1;
+        this.gradientMode = GradientModeEnumerator.LinearGradient;
+        this.gradientType = GradientTypeEnumerator.lightingGradient;
+    }
+
+    public LightingGradientLinear() {
+        initialParam();
+    }
 
     public void setNumber(String Number) {
         this.number = Number;
@@ -45,8 +59,22 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
         this.directionConfig = direction;
     }
 
+    public void setLevel(double level) {
+        this.level = level;
+    }
     public String getNumber() {
         return this.number;
+    }
+
+    public double getLevel() {
+        return this.level;
+    }
+    public GradientTypeEnumerator getGradientType() {
+        return this.gradientType;
+    }
+
+    public GradientModeEnumerator getGradientMode() {
+        return this.gradientMode;
     }
 
     public ZoneInterface getZone() {
@@ -65,6 +93,10 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
         return this.directionConfig;
     }
 
+    public double getAlpha() {
+        return this.alpha;
+    }
+
     public Color colorCalculate(Color color, int x, double inc, double aparent, boolean toLight) {
         if(toLight) {
             return (new Color((int)(color.getRed() + inc*x) > 255? 255 : (int)(color.getRed() + inc*x),
@@ -73,12 +105,6 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
                     (int)(color.getAlpha()/aparent)));
         }
         else {
-//            System.out.println((int)(color.getRed()));
-//            System.out.println((int)(color.getGreen()));
-//            System.out.println((int)(color.getBlue()));
-//            System.out.println((int)(color.getRed() + inc*x));
-//            System.out.println((int)(color.getGreen() + inc*x));
-//            System.out.println((int)(color.getBlue() + inc*x));
         return (new Color((int)(color.getRed() - inc*x) < 0? 0 : (int)(color.getRed() - inc*x),
                     (int)(color.getGreen() - inc*x) < 0? 0 : (int)(color.getGreen() - inc*x),
                     (int)(color.getBlue() - inc * x) < 0? 0 : (int)(color.getBlue() - inc*x),
@@ -92,7 +118,7 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
             PixelPositionInterface horizentalPixel,
             PixelPositionInterface verticalPixel,
             LightingGradientDirection direction,
-            double verticalInc, double horizentalInc) {
+            double verticalInc, double horizentalInc, double alpha) {
         int imgWidth = originImg.getWidth();
         int imgHeight = originImg.getHeight();
 
@@ -101,16 +127,16 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
                 for(int y = 0; y < imgHeight; y++) {
                     Color rgb = new Color(originImg.getRGB(x,y));
                     if(horizentalPixel.getX() > originPixel.getX()) {
-                        rgb = colorCalculate(rgb, x, horizentalInc, 1, true);
+                        rgb = colorCalculate(rgb, x, horizentalInc, alpha, true);
                     }
                     else {
-                        rgb = colorCalculate(rgb, imgWidth - 1 - x, horizentalInc, 1, false);
+                        rgb = colorCalculate(rgb, imgWidth - 1 - x, horizentalInc, alpha, true);
                     }
                     if(verticalPixel.getY() > originPixel.getY()) {
-                        rgb = colorCalculate(rgb, imgHeight - 1 - y, verticalInc, 1, true);
+                        rgb = colorCalculate(rgb, y, verticalInc, alpha, true);
                     }
                     else {
-                        rgb = colorCalculate(rgb, y, verticalInc, 1, false);
+                        rgb = colorCalculate(rgb, imgHeight - 1 - y, verticalInc, alpha, true);
                     }
                     resultImg.setRGB(x, y, rgb.getRGB());
                 }
@@ -121,16 +147,16 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
                 for(int y = 0; y < imgHeight; y++) {
                     Color rgb = new Color(originImg.getRGB(x,y));
                     if(horizentalPixel.getX() > originPixel.getX()) {
-                        rgb = colorCalculate(rgb, x, horizentalInc, 1, true);
+                        rgb = colorCalculate(rgb, x, horizentalInc, alpha, false);
                     }
                     else {
-                        rgb = colorCalculate(rgb, imgWidth - 1 - x, horizentalInc, 1, false);
+                        rgb = colorCalculate(rgb, imgWidth - 1 - x, horizentalInc, alpha, false);
                     }
                     if(verticalPixel.getY() > originPixel.getY()) {
-                        rgb = colorCalculate(rgb, imgHeight - 1 - y, verticalInc, 1, true);
+                        rgb = colorCalculate(rgb, y, verticalInc, alpha, false);
                     }
                     else {
-                        rgb = colorCalculate(rgb, y, verticalInc, 1, false);
+                        rgb = colorCalculate(rgb, imgHeight - 1 - y, verticalInc, alpha, false);
                     }
                     resultImg.setRGB(x, y, rgb.getRGB());
                 }
@@ -149,16 +175,16 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
         PixelPositionInterface horizentalPixel = new PixelPosition(
                 this.endPixel.getX(), this.startPixel.getY());
 
-        double horizentalInc = 255/EculidDistance.distance(new PixelPosition(0,0), new PixelPosition(imgWidth,imgHeight))
-                * Math.abs(horizentalPixel.getX() - originPixel.getX());
-        double verticalInc = 255/EculidDistance.distance(new PixelPosition(0, 0), new PixelPosition(imgWidth, imgHeight))
-                * Math.abs(verticalPixel.getY() - originPixel.getY());
+        double horizentalInc = 255/Math.pow(EculidDistance.distance(new PixelPosition(0,0), new PixelPosition(imgWidth,imgHeight)),2)
+                * Math.abs(horizentalPixel.getX() - originPixel.getX()) * this.level;
+        double verticalInc = 255/Math.pow(EculidDistance.distance(new PixelPosition(0, 0), new PixelPosition(imgWidth, imgHeight)),2)
+                * Math.abs(verticalPixel.getY() - originPixel.getY()) * this.level;
 
         BufferedImage resultImg = new BufferedImage(imgWidth, imgHeight,BufferedImage.TYPE_4BYTE_ABGR);
 
         pixelCalculate(resultImg, originImg,
                 originPixel, horizentalPixel, verticalPixel,
-                this.directionConfig, verticalInc, horizentalInc);
+                this.directionConfig, verticalInc, horizentalInc, this.alpha);
 
         return resultImg;
     }

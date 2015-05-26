@@ -11,18 +11,20 @@ import java.awt.image.BufferedImage;
 public class ZoneRectangle implements ZoneInterface {
     private PixelPositionInterface leftUp;
     private PixelPositionInterface rightDown;
+    private ZoneType type;
 
     public ZoneRectangle() {
-
+        this.type = ZoneType.Rectangle;
     }
 
     public ZoneRectangle(PixelPositionInterface leftUp, PixelPositionInterface rightDown) {
         this.leftUp = leftUp;
         this.rightDown = rightDown;
+        this.type = ZoneType.Rectangle;
     }
 
     public ZoneType getZoneType() {
-        return ZoneType.Rectangle;
+        return this.type;
     }
 
     public BufferedImage filter(BufferedImage originImg) {
@@ -41,6 +43,30 @@ public class ZoneRectangle implements ZoneInterface {
                 }
             }
             return cutImage;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public byte[] filter(byte[] originPicByte, int width, int height) {
+        int leftUpX = leftUp.getX();
+        int leftUpY = leftUp.getY();
+        int rightDownX = rightDown.getX();
+        int rightDownY = rightDown.getY();
+        int cutWidth = rightDownX - leftUpX;
+        int cutHeight = rightDownY - leftUpY;
+        byte[] cutPicByte = new byte [cutHeight*cutWidth*4];
+        if(rightDownY <= width && rightDownX <= height) {
+            for(int i = 0; i < cutWidth; i++) {
+                for(int j = 0 ; j < cutHeight; j++) {
+                    cutPicByte[4*(i + width * j)] = originPicByte[4*((leftUpX + i) + width * (leftUpY + j))];
+                    cutPicByte[4*(i + width * j) + 1] = originPicByte[4*((leftUpX + i) + width * (leftUpY + j)) + 1];
+                    cutPicByte[4*(i + width * j) + 2] = originPicByte[4*((leftUpX + i) + width * (leftUpY + j)) + 2];
+                    cutPicByte[4*(i + width * j) + 3] = originPicByte[4*((leftUpX + i) + width * (leftUpY + j)) + 3];
+                }
+            }
+            return cutPicByte;
         }
         else {
             return null;
