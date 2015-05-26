@@ -149,9 +149,9 @@ public class LightingGradient implements GradientInterface,Zone,GenerateBuffered
         PixelPositionInterface horizentalPixel = new PixelPosition(
                 this.endPixel.getX(), this.startPixel.getY());
 
-        double horizentalInc = 255/EculidDistance.distance(new PixelPosition(0,0), new PixelPosition(imgWidth,imgHeight))
+        double horizentalInc = 255/Math.pow(EculidDistance.distance(new PixelPosition(0,0), new PixelPosition(imgWidth,imgHeight)),2)
                 * Math.abs(horizentalPixel.getX() - originPixel.getX());
-        double verticalInc = 255/EculidDistance.distance(new PixelPosition(0, 0), new PixelPosition(imgWidth, imgHeight))
+        double verticalInc = 255/Math.pow(EculidDistance.distance(new PixelPosition(0, 0), new PixelPosition(imgWidth, imgHeight)),2)
                 * Math.abs(verticalPixel.getY() - originPixel.getY());
 
         BufferedImage resultImg = new BufferedImage(imgWidth, imgHeight,BufferedImage.TYPE_4BYTE_ABGR);
