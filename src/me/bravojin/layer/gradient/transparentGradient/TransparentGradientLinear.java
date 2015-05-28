@@ -18,8 +18,6 @@ import java.awt.image.BufferedImage;
  */
 public class TransparentGradientLinear implements GradientInterface,Zone,GenerateBufferedImage {
     private String number;
-    private GradientModeEnumerator gradientMode;
-    private GradientTypeEnumerator gradientType;
     private ZoneInterface zone;
     private PixelPositionInterface startPixel;
     private PixelPositionInterface endPixel;
@@ -28,8 +26,7 @@ public class TransparentGradientLinear implements GradientInterface,Zone,Generat
 
 
     public TransparentGradientLinear() {
-        this.gradientMode = GradientModeEnumerator.LinearGradient;
-        this.gradientType = GradientTypeEnumerator.transparentGradient;
+
     }
 
     public void setNumber(String number) {
@@ -61,11 +58,11 @@ public class TransparentGradientLinear implements GradientInterface,Zone,Generat
     }
 
     public GradientModeEnumerator getGradientMode() {
-        return this.gradientMode;
+        return GradientModeEnumerator.LinearGradient;
     }
 
     public GradientTypeEnumerator getGradientType() {
-        return this.gradientType;
+        return GradientTypeEnumerator.transparentGradient;
     }
 
     public ZoneInterface getZone() {

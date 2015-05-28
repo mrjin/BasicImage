@@ -19,8 +19,6 @@ import java.awt.image.BufferedImage;
 
 public class LightingGradientLinear implements GradientInterface,Zone,GenerateBufferedImage {
     private String number;
-    private GradientModeEnumerator gradientMode;
-    private GradientTypeEnumerator gradientType;
     private PixelPositionInterface startPixel;
     private PixelPositionInterface endPixel;
     private ZoneInterface zone;
@@ -31,8 +29,6 @@ public class LightingGradientLinear implements GradientInterface,Zone,GenerateBu
     private void initialParam() {
         this.alpha = 1;
         this.level = 1;
-        this.gradientMode = GradientModeEnumerator.LinearGradient;
-        this.gradientType = GradientTypeEnumerator.lightingGradient;
     }
 
     public LightingGradientLinear() {
@@ -70,11 +66,11 @@ public class LightingGradientLinear implements GradientInterface,Zone,GenerateBu
         return this.level;
     }
     public GradientTypeEnumerator getGradientType() {
-        return this.gradientType;
+        return GradientTypeEnumerator.lightingGradient;
     }
 
     public GradientModeEnumerator getGradientMode() {
-        return this.gradientMode;
+        return GradientModeEnumerator.LinearGradient;
     }
 
     public ZoneInterface getZone() {

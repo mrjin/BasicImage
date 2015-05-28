@@ -5,5 +5,6 @@ package me.bravojin.layer.gradient.gradientType;
  */
 public enum GradientTypeEnumerator {
     lightingGradient,
-    transparentGradient
+    transparentGradient,
+    colorGradient
 }
