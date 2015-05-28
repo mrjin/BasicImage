@@ -1,4 +1,4 @@
-package me.bravojin.histogram.Data;
+package me.bravojin.histogram.createHistogram.Data;
 
 /**
  * Created by tyrionlanister on 15-5-28.

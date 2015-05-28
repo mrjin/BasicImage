@@ -1,4 +1,4 @@
-package me.bravojin.histogram.Data;
+package me.bravojin.histogram.createHistogram.Data;
 
 /**
  * Created by tyrionlanister on 15-5-28.
@@ -114,11 +114,11 @@ public class HistogramDataRGB implements HistogramDataInterface {
     }
 
     public int getGFrequent(int frequency) {
-        return this.R[frequency];
+        return this.G[frequency];
     }
 
     public int getBFrequent(int frequency) {
-        return this.R[frequency];
+        return this.B[frequency];
     }
 
     public int getBits() {

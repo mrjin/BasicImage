@@ -1,4 +1,4 @@
-package me.bravojin.histogram.Data;
+package me.bravojin.histogram.createHistogram.Data;
 
 /**
  * Created by tyrionlanister on 15-5-28.
@@ -18,6 +18,7 @@ public class HistogramDataLuma implements HistogramDataInterface{
         this.bits = bits;
         this.imgHeight = imgHeight;
         this.imgWidth = imgWidth;
+        this.Luma = new int [(int)Math.pow(2, bits)];
     }
 
     public void setImgWidth(int imgWidth) {
@@ -52,6 +53,10 @@ public class HistogramDataLuma implements HistogramDataInterface{
 
     public int getImgHeight() {
         return this.imgHeight;
+    }
+
+    public int [] getLuma() {
+        return this.Luma;
     }
 
     public HistogramDataType getDataType() {
