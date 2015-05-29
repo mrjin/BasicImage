@@ -3,6 +3,7 @@ package test;
 import me.bravojin.zone.ZoneRectangle;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -39,5 +40,6 @@ public class ZoneRectangleTester {
         System.out.println(testByte[1]);
         long endTime = System.currentTimeMillis();
         System.out.println((endTime - startTime));
+
     }
 }

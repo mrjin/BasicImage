@@ -19,23 +19,24 @@ public class HistogramDataDrawGraphTester {
         long startTime = System.currentTimeMillis();
         BufferedImage testImg = null;
         try {
-            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test7.jpg"));
+            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test3.jpg"));
+//            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/Filter/Convolution_Vertical_3_21_10_.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         long readImgTime = System.currentTimeMillis();
-        HistogramDataLuma histogramDataLuma = (HistogramDataLuma) HistogramGenerate.generateHistogramDataLuma(8,testImg);
-//        HistogramDataRGB histogramDataRGB = (HistogramDataRGB) HistogramGenerate.generateHistogramDataRGB(8, testImg);
-//        BufferedImage resultImg = HistogramDataDrawGraph.drawRGBWithShade(histogramDataRGB.getR(),
-//                histogramDataRGB.getG(),histogramDataRGB.getB(),256,new Color(255,255,255),
-//                2,2,2);
+//        HistogramDataLuma histogramDataLuma = (HistogramDataLuma) HistogramGenerate.generateHistogramDataLuma(8,testImg);
+        HistogramDataRGB histogramDataRGB = (HistogramDataRGB) HistogramGenerate.generateHistogramDataRGB(8, testImg);
+        BufferedImage resultImg = HistogramDataDrawGraph.drawRGBWithShade(histogramDataRGB.getR(),
+                histogramDataRGB.getG(),histogramDataRGB.getB(),256,new Color(255,255,255),
+                2,2,2);
 
-        BufferedImage resultImg = HistogramDataDrawGraph.draw(histogramDataLuma.getLuma(),256, new Color(0,0,0)
-        ,new Color(255, 255, 255),2);
+//        BufferedImage resultImg = HistogramDataDrawGraph.draw(histogramDataLuma.getLuma(),256, new Color(0,0,0)
+//        ,new Color(255, 255, 255),2);
         long generateTime = System.currentTimeMillis();
         try {
             ImageIO.write(resultImg, "png", new FileOutputStream(
-                    "/home/tyrionlanister/图片/Java/Histogram/Histogram_7_Luma_256_256.png"));
+                    "/home/tyrionlanister/图片/Java/Histogram/Histogram_7_RGB_testForFilter_3_256_256.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

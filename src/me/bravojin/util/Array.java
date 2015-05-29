@@ -33,4 +33,12 @@ public class Array {
             return second;
         }
     }
+
+    public static double mean(int [] A) {
+        int sum = 0;
+        for(int i = 0 ; i < A.length; i++) {
+            sum += A[i];
+        }
+        return ((double)sum)/A.length;
+    }
 }

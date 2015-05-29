@@ -13,6 +13,14 @@ import java.awt.image.BufferedImage;
 public class FilterInverseColor implements FilterInterface{
     private ZoneInterface zone;
 
+    public FilterInverseColor() {
+
+    }
+
+    public FilterInverseColor(ZoneInterface zone) {
+        this.zone = zone;
+    }
+
     public FilterInverseColor setZone(ZoneInterface zone) {
         this.zone = zone;
         return this;
