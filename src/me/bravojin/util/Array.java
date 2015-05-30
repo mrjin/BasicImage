@@ -41,4 +41,36 @@ public class Array {
         }
         return ((double)sum)/A.length;
     }
+
+    public static double mean(int [] A, int paramSum) {
+        int sum = 0;
+        for(int i = 0 ; i < A.length; i++) {
+            sum += A[i];
+        }
+        return ((double)sum)/paramSum;
+    }
+
+    public static double mean(double [] A, double paramSum) {
+        double sum = 0;
+        for(int i = 0 ; i < A.length; i++) {
+            sum += A[i];
+        }
+        return sum/paramSum;
+    }
+
+    public static int sum(int [] A) {
+        int sum = 0;
+        for(int i = 0 ; i < A.length; i++) {
+            sum += A[i];
+        }
+        return sum;
+    }
+
+    public static double sum(double [] A) {
+        double sum = 0;
+        for(int i = 0 ; i < A.length; i++) {
+            sum += A[i];
+        }
+        return sum;
+    }
 }
