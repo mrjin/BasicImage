@@ -5,5 +5,7 @@ package me.bravojin.filter.type;
  */
 public enum FilterType {
     InverseColor,
-    BoxSmooth
+    BoxSmooth,
+    GuassSmooth,
+    Median,
 }

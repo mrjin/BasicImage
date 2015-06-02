@@ -1,4 +1,4 @@
-package me.bravojin.filter.basic;
+package me.bravojin.filter.linear;
 
 import me.bravojin.filter.FilterInterface;
 import me.bravojin.zone.ZoneInterface;

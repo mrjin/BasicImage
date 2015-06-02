@@ -1,8 +1,9 @@
-package me.bravojin.filter.basic;
+package me.bravojin.filter.linear;
 
-import me.bravojin.filter.FilterInterface;
 import me.bravojin.filter.type.FilterType;
+import me.bravojin.util.Convolution;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -17,8 +18,8 @@ public class FilterBoxSmooth extends FilterMatrix {
         this.widthCov = new int [3];
         this.heightCov = new int [3];
         for(int i = 0 ; i < 3 ; i++){
-            this.widthCov[i] = 0;
-            this.heightCov[i] = 0;
+            this.widthCov[i] = 1;
+            this.heightCov[i] = 1;
         }
         for(int i = 0 ; i < 3 ; i++){
             for(int j = 0 ; j < 3 ; j++) {
@@ -32,9 +33,11 @@ public class FilterBoxSmooth extends FilterMatrix {
         super(kernelWidthLength, kernelHeightWidth);
         this.widthCov = new int [kernelWidthLength];
         this.heightCov = new int [kernelHeightWidth];
-        for(int i = 0 ; i < 3 ; i++){
-            this.widthCov[i] = 0;
-            this.heightCov[i] = 0;
+        for(int i = 0 ; i < kernelHeightWidth ; i++){
+            this.heightCov[i] = 1;
+        }
+        for(int j = 0 ; j < kernelWidthLength ; j++) {
+            this.widthCov[j] = 1;
         }
         for(int i = 0 ; i < kernelWidthLength ; i++){
             for(int j = 0 ; j < kernelHeightWidth ; j++) {
@@ -57,6 +60,15 @@ public class FilterBoxSmooth extends FilterMatrix {
     }
 
     public BufferedImage generate(BufferedImage originImg) {
-        return null;
+        BufferedImage resultImg = Convolution.verticalConvolution(
+                Convolution.horizontalConvolution(originImg, this.widthCov, this.widthCov.length/2,
+                        new Color(255, 255, 255)), this.heightCov,
+                        this.heightCov.length/2, new Color(255, 255, 255));
+        if(this.zone == null) {
+            return resultImg;
+        }
+        else {
+            return this.zone.filter(resultImg);
+        }
     }
 }

@@ -4,6 +4,7 @@ import me.bravojin.pixelPosition.PixelPosition;
 import me.bravojin.pixelPosition.PixelPositionInterface;
 
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 /**
  * Created by tyrionlanister on 15-5-25.
@@ -25,6 +26,14 @@ public class ZoneRectangle implements ZoneInterface {
 
     public ZoneType getZoneType() {
         return this.type;
+    }
+
+    public PixelPositionInterface getLeftUp(){
+        return this.leftUp;
+    }
+
+    public PixelPositionInterface getRightDown(){
+        return this.rightDown;
     }
 
     public BufferedImage filter(BufferedImage originImg) {
@@ -81,4 +90,18 @@ public class ZoneRectangle implements ZoneInterface {
         this.rightDown = new PixelPosition(x, y);
     }
 
+    public boolean equals(Object obj) {
+        if(obj instanceof ZoneRectangle) {
+            ZoneRectangle testRec = (ZoneRectangle)obj;
+            if(testRec.getLeftUp().equals(this.leftUp) && testRec.getRightDown().equals(this.rightDown)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 }

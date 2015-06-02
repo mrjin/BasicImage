@@ -1,5 +1,7 @@
 package me.bravojin.pixelPosition;
 
+import java.util.Objects;
+
 /**
  * Created by tyrionlanister on 15-5-25.
  */
@@ -24,5 +26,20 @@ public class PixelPosition implements PixelPositionInterface {
     }
     public int getY() {
         return this.y;
+    }
+
+    public boolean equals(Object obj) {
+        if(obj instanceof PixelPosition) {
+            PixelPosition pixel = (PixelPosition)obj;
+            if(pixel.getX() == this.x && pixel.getY() == this.y) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 }
