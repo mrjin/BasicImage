@@ -29,11 +29,14 @@ public class Convolution2D {
                     if(y < centerVel || x < centerHor) {
                         resultImg.setRGB(x, y, originImg.getRGB(x, y));
                     }
+                    else if(imgHeight - y < conHeight - centerVel || imgWidth - x < conWidth - centerHor) {
+                        resultImg.setRGB(x, y, originImg.getRGB(x, y));
+                    }
                     else {
                         int [][] rgb = new int [conHeight][conWidth];
                         for(int i = -centerVel ; i < conHeight - centerVel ; i++) {
                             for(int j = -centerHor ; j < conWidth - centerHor ; j++) {
-                                rgb[j][i] = originImg.getRGB(x+j, y+i);
+                                rgb[centerHor+j][centerVel+i] = originImg.getRGB(x+j, y+i);
                             }
                         }
                         resultImg.setRGB(x, y, nonCal.getCenterValue(rgb));

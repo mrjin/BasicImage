@@ -8,4 +8,5 @@ public enum FilterType {
     BoxSmooth,
     GuassSmooth,
     Median,
+    DifferentCurve
 }
