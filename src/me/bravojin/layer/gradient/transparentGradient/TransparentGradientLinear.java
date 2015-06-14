@@ -37,20 +37,24 @@ public class TransparentGradientLinear implements GradientInterface,Zone,Generat
         this.zone = zone;
     }
 
-    public void setStartPixel(PixelPositionInterface start) {
+    public TransparentGradientLinear setStartPixel(PixelPositionInterface start) {
         this.startPixel = start;
+        return this;
     }
 
-    public void setEndPixel(PixelPositionInterface end) {
+    public TransparentGradientLinear setEndPixel(PixelPositionInterface end) {
         this.endPixel = end;
+        return this;
     }
 
-    public void setDirectionConfig(TransparentGradientDirection direction) {
+    public TransparentGradientLinear setDirectionConfig(TransparentGradientDirection direction) {
         this.directionConfig = direction;
+        return this;
     }
 
-    public void setLevel(double level) {
+    public TransparentGradientLinear setLevel(double level) {
         this.level = level;
+        return this;
     }
 
     public String getNumber() {
@@ -172,7 +176,13 @@ public class TransparentGradientLinear implements GradientInterface,Zone,Generat
         return resultImg;
     }
 
-    public BufferedImage generate(BufferedImage originImg) {
-        return this.zone.filter(imageCalculate(originImg));
+    public BufferedImage generate(BufferedImage originImg)
+    {
+        if(zone != null) {
+            return this.zone.filter(imageCalculate(originImg));
+        }
+        else {
+            return imageCalculate(originImg);
+        }
     }
 }

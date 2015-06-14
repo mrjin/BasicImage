@@ -26,6 +26,9 @@ public class FilterDifferentCurve implements FilterInterface{
             else if(i > center) {
                 this.kernel[i] = 1.0/(len - 1);
             }
+            else {
+                this.kernel[i] = 0;
+            }
         }
     }
 
@@ -88,8 +91,8 @@ public class FilterDifferentCurve implements FilterInterface{
 
     public BufferedImage generate(BufferedImage originImg) {
         BufferedImage resultImg = Convolution.verticalConvolution(
-                Convolution.horizontalConvolution(originImg, kernel, center, new Color(255, 255, 255)),
-                kernel, center, new Color(255, 255, 255));
+                Convolution.horizontalConvolution(originImg, kernel,1.0, center, new Color(255, 255, 255)),
+                kernel,1.0, center, new Color(255, 255, 255));
         if(this.zone == null) {
             return resultImg;
         }

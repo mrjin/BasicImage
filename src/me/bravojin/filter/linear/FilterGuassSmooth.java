@@ -18,26 +18,26 @@ public class FilterGuassSmooth implements FilterInterface {
     private int center;
     private ZoneInterface zone;
 
-    public FilterGuassSmooth(int sigma){
+    public FilterGuassSmooth(double sigma){
         this.sigma = sigma;
         this.defaultParam = 3;
         this.update();
     }
 
-    public FilterGuassSmooth(int sigma, int defaultParam){
+    public FilterGuassSmooth(double sigma, int defaultParam){
         this.sigma = sigma;
         this.defaultParam = defaultParam;
         this.update();
     }
 
-    public FilterGuassSmooth(int sigma, ZoneInterface zone) {
+    public FilterGuassSmooth(double sigma, ZoneInterface zone) {
         this.zone = zone;
         this.sigma = sigma;
         this.defaultParam = 3;
         this.update();
     }
 
-    public FilterGuassSmooth(int sigma, int defaultParam, ZoneInterface zone) {
+    public FilterGuassSmooth(double sigma, int defaultParam, ZoneInterface zone) {
         this.zone = zone;
         this.sigma = sigma;
         this.defaultParam = defaultParam;
@@ -81,7 +81,7 @@ public class FilterGuassSmooth implements FilterInterface {
         this.center = (int)(defaultParam*sigma);
         this.kernel = new double [2*center+1];
         for(int i = 0 ; i < kernel.length ; i++) {
-            double r = center - 1;
+            double r = center - i;
             this.kernel[i] = Math.exp(-0.5*(r*r/sigma2));
         }
     }
@@ -96,5 +96,9 @@ public class FilterGuassSmooth implements FilterInterface {
         else {
             return this.zone.filter(resultImg);
         }
+    }
+
+    public String toString() {
+        return "Sigma:"+this.sigma;
     }
 }

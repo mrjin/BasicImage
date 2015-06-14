@@ -42,4 +42,8 @@ public class PixelPosition implements PixelPositionInterface {
             return false;
         }
     }
+
+    public String toString() {
+        return "(" + this.x + "," + this.y+")";
+    }
 }

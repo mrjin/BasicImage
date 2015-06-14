@@ -27,4 +27,27 @@ public class RGB {
             return null;
         }
     }
+    public static int check(int rgb, boolean diff) {
+        if(!diff) {
+            if (rgb > 255) {
+                return 255;
+            } else if (rgb < 0) {
+                return 0;
+            } else {
+                return rgb;
+            }
+        }
+        else {
+            if (rgb > 255) {
+                return 255;
+            } else if (rgb < 0) {
+                return 0;
+            } else {
+                return 128;
+            }
+        }
+    }
+    public static int check(int rgb) {
+        return check(rgb, false);
+    }
 }

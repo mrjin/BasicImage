@@ -43,20 +43,24 @@ public class LightingGradientLinear implements GradientInterface,Zone,GenerateBu
         this.zone = zone;
     }
 
-    public void setStartPixel(PixelPositionInterface start) {
+    public LightingGradientLinear setStartPixel(PixelPositionInterface start) {
         this.startPixel = start;
+        return this;
     }
 
-    public void setEndPixel(PixelPositionInterface end) {
+    public LightingGradientLinear setEndPixel(PixelPositionInterface end) {
         this.endPixel = end;
+        return this;
     }
 
-    public void setDirectionConfig(LightingGradientDirection direction) {
+    public LightingGradientLinear setDirectionConfig(LightingGradientDirection direction) {
         this.directionConfig = direction;
+        return this;
     }
 
-    public void setLevel(double level) {
+    public LightingGradientLinear setLevel(double level) {
         this.level = level;
+        return this;
     }
     public String getNumber() {
         return this.number;
@@ -186,7 +190,12 @@ public class LightingGradientLinear implements GradientInterface,Zone,GenerateBu
     }
 
     public BufferedImage generate(BufferedImage originPic) {
-        return this.zone.filter(imageCalculate(originPic));
+        if(this.zone != null) {
+            return this.zone.filter(imageCalculate(originPic));
+        }
+        else {
+            return imageCalculate(originPic);
+        }
     }
 
 

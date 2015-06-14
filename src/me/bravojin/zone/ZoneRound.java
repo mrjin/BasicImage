@@ -47,10 +47,6 @@ public class ZoneRound implements ZoneInterface{
         return resultImg;
     }
 
-    public ZoneType getType() {
-        return this.type;
-    }
-
     public ZoneType getZoneType() {
         return this.type;
     }

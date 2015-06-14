@@ -39,12 +39,12 @@ public class FilterBoxSmooth extends FilterMatrix {
         for(int j = 0 ; j < kernelWidthLength ; j++) {
             this.widthCov[j] = 1;
         }
-        for(int i = 0 ; i < kernelWidthLength ; i++){
-            for(int j = 0 ; j < kernelHeightWidth ; j++) {
-                this.paramMatrix[i][j] = 1;
-                this.sum = kernelWidthLength * kernelHeightWidth;
-            }
-        }
+//        for(int i = 0 ; i < kernelWidthLength ; i++){
+//            for(int j = 0 ; j < kernelHeightWidth ; j++) {
+//                this.paramMatrix[i][j] = 1;
+//                this.sum = kernelWidthLength * kernelHeightWidth;
+//            }
+//        }
     }
 
     public int [] getWidthCov() {
@@ -70,5 +70,9 @@ public class FilterBoxSmooth extends FilterMatrix {
         else {
             return this.zone.filter(resultImg);
         }
+    }
+
+    public String toString(){
+        return this.widthCov.length + ":" + this.heightCov.length;
     }
 }

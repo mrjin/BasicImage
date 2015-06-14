@@ -1,6 +1,6 @@
 package test;
 
-import me.bravojin.filter.basic.FilterInverseColor;
+import me.bravojin.filter.linear.FilterUSM;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,25 +8,25 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 /**
- * Created by tyrionlanister on 15-5-29.
+ * Created by tyrionlanister on 15-6-14.
  */
-public class FilterInverseColorTester {
+public class FilterUSMTester {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
         BufferedImage testImg = null;
         try {
-            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test3.jpg"));
+            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test10.jpg"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         long readImgTime = System.currentTimeMillis();
-        FilterInverseColor inv = new FilterInverseColor();
-        BufferedImage resultImg = inv.generate(testImg);
+        FilterUSM filterUSM = new FilterUSM();
+        BufferedImage resultImg = filterUSM.setAlpha(0.5).setSigma(5).generate(testImg);
 
         long generateTime = System.currentTimeMillis();
         try {
             ImageIO.write(resultImg, "png", new FileOutputStream(
-                    "/home/tyrionlanister/图片/Java/Filter/InverseColor_0_.png"));
+                    "/home/tyrionlanister/图片/Java/Filter/USM_10_5_0.5_.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,7 +15,7 @@ public class FilterDifferentCurveTester {
         long startTime = System.currentTimeMillis();
         BufferedImage testImg = null;
         try {
-            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test.jpg"));
+            testImg = ImageIO.read(new FileInputStream("/home/tyrionlanister/图片/Java/test4.jpg"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class FilterDifferentCurveTester {
         long generateTime = System.currentTimeMillis();
         try {
             ImageIO.write(resultImg, "png", new FileOutputStream(
-                    "/home/tyrionlanister/图片/Java/Filter/DifferentCurve_3_.png"));
+                    "/home/tyrionlanister/图片/Java/Filter/DifferentCurve_4_.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
