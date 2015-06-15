@@ -1,8 +1,6 @@
 package me.bravojin.LayerContent;
 
-import me.bravojin.LayerContent.LayerSuper.LayerSuperDarken;
-import me.bravojin.LayerContent.LayerSuper.LayerSuperMultiply;
-import me.bravojin.LayerContent.LayerSuper.LayerSuperSubtract;
+import me.bravojin.LayerContent.LayerSuper.*;
 import me.bravojin.layer.Layer;
 
 import java.awt.image.BufferedImage;
@@ -29,7 +27,7 @@ public class LayerContent {
         this.add(layer);
     }
     public LayerContent add(Layer layer) {
-        this.addLayer(layer).addSuperPositionKind(LayerContentKind.Subtract).addSuperPosition();
+        this.addLayer(layer).addSuperPositionKind(LayerContentKind.Normal).addSuperPosition();
         return this;
     }
 
@@ -40,7 +38,7 @@ public class LayerContent {
 
     public LayerContent add(int index) {
         if(index < this.layer.size()) {
-            this.addLayer(this.layer.get(index)).addSuperPositionKind(LayerContentKind.Subtract).addSuperPosition();
+            this.addLayer(this.layer.get(index)).addSuperPositionKind(LayerContentKind.Normal).addSuperPosition();
         }
         else {
             System.out.print("[info]401 index out of range");
@@ -94,14 +92,65 @@ public class LayerContent {
             return this.layer.get(0).getTopLayerImg();
         }
         else {
-            if(this.superPositionKind.get(index) == LayerContentKind.Darken) {
+            if(this.superPositionKind.get(index) == LayerContentKind.Normal) {
+                return this.layer.get(index).getTopLayerImg();
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Darken) {
                 return LayerSuperDarken.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
             }
-            if(this.superPositionKind.get(index) == LayerContentKind.Multiply) {
+            else if(this.superPositionKind.get(index) == LayerContentKind.Multiply) {
                 return LayerSuperMultiply.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
             }
-            if(this.superPositionKind.get(index) == LayerContentKind.Subtract) {
+            else if(this.superPositionKind.get(index) == LayerContentKind.Subtract) {
                 return LayerSuperSubtract.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Add) {
+                return LayerSuperAdd.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.ColorBurn) {
+                return LayerSuperColorBurn.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.LinearBurn) {
+                return LayerSuperLinearBurn.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Lighten) {
+                return LayerSuperLighten.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Screen) {
+                return LayerSuperScreen.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.ColorDodge) {
+                return LayerSuperColorDodge.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.LinearDodge) {
+                return LayerSuperLinearDodge.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Overlay) {
+                return LayerSuperOverlay.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.SoftLight) {
+                return LayerSuperSoftLight.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.HardLight) {
+                return LayerSuperHardLight.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.VividLight) {
+                return LayerSuperVividLight.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.LinearLight) {
+                return LayerSuperLinearLight.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.PinLight) {
+                return LayerSuperPinLight.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.HardMix) {
+                return LayerSuperHardMix.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Difference) {
+                return LayerSuperDifference.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
+            }
+            else if(this.superPositionKind.get(index) == LayerContentKind.Exclusion) {
+                return LayerSuperExclusion.generate(this.superPosition.get(index - 1), this.layer.get(index).getTopLayerImg());
             }
         }
         return null;
@@ -126,6 +175,28 @@ public class LayerContent {
         }
         else {
             return this.layer.get(index);
+        }
+    }
+
+    public LayerContentKind getLayerKindByIndex(int index) {
+        if(index < this.superPositionKind.size()) {
+            return this.superPositionKind.get(index);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public LayerContent delete(int index) {
+        if(index < this.layer.size()) {
+            this.layer.remove(index);
+            this.superPositionKind.remove(index);
+            this.superPosition.remove(index);
+            this.updateSuperPosition(index);
+            return this;
+        }
+        else {
+            return this;
         }
     }
 }

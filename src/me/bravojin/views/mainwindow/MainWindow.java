@@ -1,10 +1,10 @@
 package me.bravojin.views.mainwindow;
 
 import me.bravojin.LayerContent.LayerContent;
+import me.bravojin.LayerContent.LayerContentKind;
 import me.bravojin.controller.histogram.GenerateHistogramController;
-import me.bravojin.controller.layers.CreateLayerController;
-import me.bravojin.controller.layers.TopLayerShowController;
-import me.bravojin.controller.layers.UpdateLayerController;
+import me.bravojin.controller.layerDetail.LayerDetailClose;
+import me.bravojin.controller.layers.*;
 import me.bravojin.controller.openSave.OpenImageController;
 import me.bravojin.controller.openSave.OpenImageSizeChangeController;
 import me.bravojin.controller.openSave.SaveImageController;
@@ -12,6 +12,7 @@ import me.bravojin.controller.parameter.FilterInverseController;
 import me.bravojin.controller.parameter.gradient.GradientClose;
 import me.bravojin.controller.parameter.smooth.SmoothClose;
 import me.bravojin.filter.basic.FilterInverseColor;
+import me.bravojin.views.layerwindow.LayerDetailWindow;
 import me.bravojin.views.paramwindow.GradientParam;
 import me.bravojin.views.paramwindow.SmoothParam;
 import me.bravojin.views.util.CellRendererListChannels;
@@ -29,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -92,6 +94,8 @@ public class MainWindow {
     private OpenImageSizeChangeController openImageSizeChangeController;
     private SaveImageController saveImageController;
     private FilterInverseController filterInverseController;
+    private LayerContentSuperController layerContentSuperController;
+    private LayerDeleteController layerDeleteController;
 
     private long saveTime;
     private String saveFilename;
@@ -104,7 +108,12 @@ public class MainWindow {
     private JFrame gradientParamWindow;
     private GradientParam gradientParam;
 
+    private JFrame layerDetailWindow;
+    private LayerDetailWindow layerDetail;
+
     private DefaultMutableTreeNode root;
+
+    private ArrayList<String> comBoxContent;
 
     public MainWindow() {
         LayerContent layerContent = new LayerContent();
@@ -133,10 +142,42 @@ public class MainWindow {
         gradientParamWindow.setSize(new Dimension(600, 500));
         gradientParam.setMainWindow(this).setLayerContent(layerContent).setGradientClose(new GradientClose(gradientParamWindow));
 
+        layerDetail = new LayerDetailWindow();
+        layerDetailWindow = new JFrame("Layer Detail");
+        layerDetailWindow.setContentPane(layerDetail.getPanel1());
+        layerDetailWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        layerDetailWindow.pack();
+        layerDetailWindow.setSize(new Dimension(700, 500));
+        layerDetail.setMainWindow(this).setLayerContent(layerContent).setLayerDetailClose(new LayerDetailClose(layerDetailWindow));
+
         this.ListLayer = new JList();
 
         $$$setupUI$$$();
 
+        comBoxContent = new ArrayList<String>();
+        comBoxContent.add("Normal");
+        comBoxContent.add("Darken");
+        comBoxContent.add("Multiply");
+        comBoxContent.add("Subtract");
+        comBoxContent.add("Add");
+        comBoxContent.add("ColorBurn");
+        comBoxContent.add("LinearBurn");
+        comBoxContent.add("Lighten");
+        comBoxContent.add("Screen");
+        comBoxContent.add("ColorDodge");
+        comBoxContent.add("LinearDodge");
+        comBoxContent.add("Overlay");
+        comBoxContent.add("SoftLight");
+        comBoxContent.add("HardLight");
+        comBoxContent.add("VividLight");
+        comBoxContent.add("LinearLight");
+        comBoxContent.add("PinLight");
+        comBoxContent.add("HardMix");
+        comBoxContent.add("Difference");
+        comBoxContent.add("Exclusion");
+        for (int i = 0; i < comBoxContent.size(); i++) {
+            comboBox1.addItem(comBoxContent.get(i));
+        }
 
         this.ListLayer.setVisible(true);
         Vector<String> a = new Vector<String>();
@@ -153,6 +194,8 @@ public class MainWindow {
         this.openImageSizeChangeController = new OpenImageSizeChangeController(layerContent, this);
         this.saveImageController = new SaveImageController(layerContent, this);
         this.filterInverseController = new FilterInverseController(layerContent, this);
+        this.layerContentSuperController = new LayerContentSuperController(layerContent, this);
+        this.layerDeleteController = new LayerDeleteController(layerContent, this);
 
         smoothPopMenu = new JPopupMenu();
         smoothPopMenu.add(this.GuassSmoothButton);
@@ -338,6 +381,28 @@ public class MainWindow {
                 System.out.println("[log]Inverse Color Filter to Layer");
             }
         });
+        comboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int choice = comboBox1.getSelectedIndex();
+                System.out.println("[log]Layer Content Kind Changed");
+                layerContentSuperController.update(LayerContentKind.valueOf(comBoxContent.get(choice)),
+                        getLayerListSelectedIndex());
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                layerDeleteController.update(getLayerListSelectedIndex());
+            }
+        });
+        detailButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                layerDetail.setSelectedIndex(getLayerListSelectedIndex()).updateList();
+                layerDetailWindow.setVisible(true);
+            }
+        });
     }
 
 //    @Override
@@ -347,8 +412,10 @@ public class MainWindow {
 
     private int getLayerListSelectedIndex() {
         if (ListLayer.isSelectionEmpty()) {
+            System.out.println("-1");
             return -1;
         } else {
+            System.out.println(ListLayer.getSelectedIndex());
             return ListLayer.getSelectedIndex();
         }
     }
@@ -391,9 +458,14 @@ public class MainWindow {
     public void paintTopLayer(BufferedImage bufferedImage) {
         //((JPanelMain) this.panelMain).setImage(bufferedImage);
         this.ImageLabel.setVisible(false);
-        this.ImageLabel.setIcon(new ImageIcon(bufferedImage));
+        if (bufferedImage != null) {
+            this.ImageLabel.setIcon(new ImageIcon(bufferedImage));
+            this.ImageLabel.setBounds(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+        } else {
+            this.ImageLabel.setIcon(null);
+        }
         this.ImageLabel.setText("");
-        this.ImageLabel.setBounds(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+
         this.ImageLabel.setVisible(true);
         System.out.println("[log]Paint Top Layer");
     }

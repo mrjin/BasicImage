@@ -17,9 +17,15 @@ public class TopLayerShowController {
     }
 
     public TopLayerShowController update() {
-        this.mainWindow.paintTopLayer(this.layerContent.getTop());
+        if(this.layerContent.getTop() == null) {
+            this.mainWindow.paintTopLayer(null);
+            return this;
+        }
+        else {
+            this.mainWindow.paintTopLayer(this.layerContent.getTop());
 //        this.mainWindow.getUpdateLayerController().reGenerate();
-        return this;
+            return this;
+        }
     }
 
     public LayerContent getLayerContent() {

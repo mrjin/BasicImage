@@ -49,9 +49,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(x,imgHeight - flag + i));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -72,9 +73,10 @@ public class Convolution {
                             B[destination+i-y] = color.getBlue() * kernel[destination+i-y];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(x, i));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -127,9 +129,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(imgWidth - flag + i, y));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -150,9 +153,10 @@ public class Convolution {
                             B[destination+i-x] = color.getBlue() * kernel[destination+i-x];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(i, y));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -205,9 +209,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(x,imgHeight - flag + i));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, Array.sum(kernel)));
                         int meanG = RGB.check((int)Array.mean(G, Array.sum(kernel)));
@@ -228,9 +233,10 @@ public class Convolution {
                             B[destination+i-y] = color.getBlue() * kernel[destination+i-y];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(x, i));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, Array.sum(kernel)));
                         int meanG = RGB.check((int)Array.mean(G, Array.sum(kernel)));
@@ -283,9 +289,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(imgWidth - flag + i, y));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, Array.sum(kernel)));
                         int meanG = RGB.check((int)Array.mean(G, Array.sum(kernel)));
@@ -306,9 +313,10 @@ public class Convolution {
                             B[destination+i-x] = color.getBlue() * kernel[destination+i-x];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(i, y));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int) Array.mean(R, Array.sum(kernel)));
                         int meanG = RGB.check((int) Array.mean(G, Array.sum(kernel)));
@@ -361,9 +369,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(x,imgHeight - flag + i));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -384,9 +393,10 @@ public class Convolution {
                             B[destination+i-y] = color.getBlue() * kernel[destination+i-y];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(x, i));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -439,9 +449,10 @@ public class Convolution {
                             B[flag+i] = color.getBlue() * kernel[flag+i];
                         }
                         for(int i = 0; i < flag ; i ++) {
-                            R[i] = barginConvColor.getRed() * kernel[i];
-                            G[i] = barginConvColor.getGreen() * kernel[i];
-                            B[i] = barginConvColor.getBlue() * kernel[i];
+                            Color newColor = new Color(originImg.getRGB(imgWidth - flag + i, y));
+                            R[i] = newColor.getRed() * kernel[i];
+                            G[i] = newColor.getGreen() * kernel[i];
+                            B[i] = newColor.getBlue() * kernel[i];
                         }
                         int meanR = RGB.check((int)Array.mean(R, parameter));
                         int meanG = RGB.check((int)Array.mean(G, parameter));
@@ -462,9 +473,10 @@ public class Convolution {
                             B[destination+i-x] = color.getBlue() * kernel[destination+i-x];
                         }
                         for(int i = 0 ; i < kernel.length - flag; i++) {
-                            R[flag+i] = barginConvColor.getRed() * kernel[flag+i];
-                            G[flag+i] = barginConvColor.getGreen() * kernel[flag+i];
-                            B[flag+i] = barginConvColor.getBlue() * kernel[flag+i];
+                            Color newColor = new Color(originImg.getRGB(i, y));
+                            R[flag+i] = newColor.getRed() * kernel[flag+i];
+                            G[flag+i] = newColor.getGreen() * kernel[flag+i];
+                            B[flag+i] = newColor.getBlue() * kernel[flag+i];
                         }
                         int meanR = RGB.check((int) Array.mean(R, parameter));
                         int meanG = RGB.check((int) Array.mean(G, parameter));
