@@ -5,7 +5,7 @@ import me.bravojin.views.layerwindow.LayerDetailWindow;
 import javax.swing.*;
 
 /**
- * Created by tyrionlanister on 15-6-15.
+ * LayerDetail窗口对应的关闭的控制器
  */
 public class LayerDetailClose {
     private JFrame layerDetailWindow;

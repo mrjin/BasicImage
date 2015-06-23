@@ -7,7 +7,7 @@ import me.bravojin.views.mainwindow.MainWindow;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by tyrionlanister on 15-6-11.
+ * 创建图层控制器
  */
 public class CreateLayerController {
     private LayerContent layerContent;

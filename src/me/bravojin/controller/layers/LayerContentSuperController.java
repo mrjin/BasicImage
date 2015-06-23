@@ -5,7 +5,7 @@ import me.bravojin.LayerContent.LayerContentKind;
 import me.bravojin.views.mainwindow.MainWindow;
 
 /**
- * Created by tyrionlanister on 15-6-14.
+ * 图层叠加模式修改后更新对应的控制器
  */
 public class LayerContentSuperController {
     private LayerContent layerContent;

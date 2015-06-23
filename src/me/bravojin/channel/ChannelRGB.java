@@ -3,7 +3,7 @@ package me.bravojin.channel;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by tyrionlanister on 15-6-13.
+ * 产生和保存4个通道的算法对应的类，输入参数为原始图片，产生对应的通道。
  */
 public class ChannelRGB {
     private BufferedImage RImg;

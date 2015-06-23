@@ -10,7 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.Vector;
 
 /**
- * Created by tyrionlanister on 15-6-11.
+ * 更新图层列表显示的控制器
  */
 public class UpdateLayerController {
     private LayerContent layerContent;

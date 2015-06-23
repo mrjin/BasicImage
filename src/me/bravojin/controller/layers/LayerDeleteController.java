@@ -5,7 +5,7 @@ import me.bravojin.layer.Layer;
 import me.bravojin.views.mainwindow.MainWindow;
 
 /**
- * Created by tyrionlanister on 15-6-14.
+ * 图层删除对应的控制器
  */
 public class LayerDeleteController {
     private LayerContent layerContent;

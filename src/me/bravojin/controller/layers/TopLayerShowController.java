@@ -5,7 +5,7 @@ import me.bravojin.layer.Layer;
 import me.bravojin.views.mainwindow.MainWindow;
 
 /**
- * Created by tyrionlanister on 15-6-11.
+ * 更新主界面图片显示的控制器
  */
 public class TopLayerShowController {
     private MainWindow mainWindow;

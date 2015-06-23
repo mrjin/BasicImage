@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * Created by tyrionlanister on 15-6-13.
+ * 保存图片对应的控制器
  */
 public class SaveImageController {
     private MainWindow mainWindow;

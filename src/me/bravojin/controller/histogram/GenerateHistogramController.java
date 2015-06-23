@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by tyrionlanister on 15-6-11.
+ * 主窗口中的histogram对应的控制器
  */
 public class GenerateHistogramController {
     private MainWindow mainWindow;

@@ -6,7 +6,8 @@ import me.bravojin.views.mainwindow.MainWindow;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by tyrionlanister on 15-6-12.
+ * 打开文件并添加到图层对应的控制器
+ *
  */
 public class OpenImageController {
     private LayerContent layerContent;

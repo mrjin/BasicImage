@@ -1,7 +1,7 @@
 package me.bravojin.controller.channels;
 
 /**
- * Created by tyrionlanister on 15-6-12.
+ * 主窗口的TabbedPanel中的channel对应的控制器。
  */
 public class ChannelGenerateController {
 }

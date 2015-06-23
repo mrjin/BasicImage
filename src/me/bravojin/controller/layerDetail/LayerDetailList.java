@@ -9,6 +9,7 @@ import java.util.Vector;
 
 /**
  * Created by tyrionlanister on 15-6-15.
+ * 这个文件是每个图层的详细结果，与主框图中的Detail按钮是一一对应的关系。
  */
 public class LayerDetailList {
     public LayerDetailWindow layerDetailWindow;

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by tyrionlanister on 15-6-12.
+ * 将打开的图片大小改为和主界面保持一致。
  */
 public class OpenImageSizeChangeController {
     private MainWindow mainWindow;
